@@ -53,6 +53,7 @@ model Task {
   name      String
   status    TASK_STATUS @default(PRIORITIZED)
   estimate  DateTime?
+  description String?
   isDeleted Boolean     @default(false)
 
   ownerId String
