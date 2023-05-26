@@ -36,6 +36,9 @@ model Project {
   owner   User   @relation(fields: [ownerId], references: [id])
 
   tasks Task[]
+
+  @@unique([ownerId, name])
+  @@index([ownerId, id])
 }
 
 enum TASK_STATUS {
@@ -53,12 +56,14 @@ model Task {
   name      String
   status    TASK_STATUS @default(PRIORITIZED)
   estimate  DateTime?
-  description String?
   isDeleted Boolean     @default(false)
+  description String?
 
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id])
 
   projectId String
   project   Project @relation(fields: [projectId], references: [id])
+
+  @@index([ownerId])
 }

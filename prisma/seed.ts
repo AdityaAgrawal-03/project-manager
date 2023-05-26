@@ -13,23 +13,23 @@ const randomTaskStatus = () => {
 
 async function main() {
   const user = await db.user.upsert({
-    where: { email: "aditya@prisma.io" },
-    update: {},
+    where: { email: "aditya@gmail.com" },
     create: {
-      email: "aditya@prisma.io",
       firstName: "aditya",
       lastName: "agrawal",
+      email: "aditya@gmail.com",
       password: "password",
       projects: {
         create: new Array(5).fill(1).map((_, i) => ({
-          name: `Project ${i}`,
-          estimate: new Date(2023, 2, 18),
-        })),
-      },
+          name: `project ${i}`,
+          estimate: new Date(2023, 5, 30)
+        }))
+      }
     },
+    update: {},
     include: {
-      projects: true,
-    },
+      projects: true
+    }
   });
 
   const tasks = await Promise.all(
@@ -39,7 +39,7 @@ async function main() {
           name: `Task ${i}`,
           status: randomTaskStatus(),
           description: `Description for task ${i} for project ${project.id}`,
-          estimate: new Date(2023, 2, 18),
+          estimate: new Date(2023, 5, 30),
           ownerId: user.id,
           projectId: project.id,
         })),
