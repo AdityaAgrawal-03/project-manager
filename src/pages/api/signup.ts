@@ -22,7 +22,7 @@ export default async function signup(req: NextApiRequest, res: NextApiResponse) 
             path: '/'
         }))
 
-        res.status(201);
+        res.status(201).json({ success: true })
 
     } else {
         res.status(405).json({ success: false, message: 'method not allowed' });

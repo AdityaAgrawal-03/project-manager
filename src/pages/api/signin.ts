@@ -35,6 +35,8 @@ export default async function signin(
           path: "/",
         })
       );
+
+      res.status(201).json({ success: true })
     } else {
       res.status(401).json({ success: false, message: "Invalid password!" });
     }
